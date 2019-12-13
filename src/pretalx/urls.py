@@ -5,6 +5,8 @@ from django.apps import apps
 from django.conf import settings
 from django.conf.urls import include, url
 from django.conf.urls.static import static
+from django.urls import path
+import django_cas_ng.views
 
 plugin_patterns = []
 for app in apps.get_app_configs():
@@ -24,6 +26,8 @@ urlpatterns = [
     url(r'', include('pretalx.agenda.urls', namespace='agenda')),
     url(r'', include('pretalx.cfp.urls', namespace='cfp')),
     url(r'', include((plugin_patterns, 'plugins'))),
+    path('accounts/login', django_cas_ng.views.LoginView.as_view(), name='cas_ng_login'),
+    path('accounts/logout', django_cas_ng.views.LogoutView.as_view(), name='cas_ng_logout'),
 ]
 
 if settings.DEBUG:

@@ -25,7 +25,7 @@ class LoginView(GenericLoginView):
     def get_error_url(self):
         if self.event:
             return reverse('orga:event.login', kwargs={'event': self.event.slug})
-        return reverse('orga:login')
+        return reverse('cas_ng_login')
 
     def get_success_url(self):
         messages.success(self.request, phrases.orga.logged_in)
@@ -41,7 +41,7 @@ class LoginView(GenericLoginView):
 
 def logout_view(request: HttpRequest) -> HttpResponseRedirect:
     logout(request)
-    return redirect(reverse('orga:login'))
+    return redirect(reverse('cas_ng_login'))
 
 
 class ResetView(GenericResetView):
@@ -49,7 +49,7 @@ class ResetView(GenericResetView):
     form_class = ResetForm
 
     def get_success_url(self):
-        return reverse('orga:login')
+        return reverse('cas_ng_login')
 
 
 class RecoverView(FormView):
@@ -77,4 +77,4 @@ class RecoverView(FormView):
         self.user.pw_reset_time = None
         self.user.save()
         messages.success(self.request, phrases.cfp.auth_reset_success)
-        return redirect(reverse('orga:login'))
+        return redirect(reverse('cas_ng_login'))

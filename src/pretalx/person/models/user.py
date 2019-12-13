@@ -129,7 +129,7 @@ class User(PermissionsMixin, AbstractBaseUser):
         self.email = self.email.lower().strip()
         if not self.code:
             assign_code(self)
-        return super().save(args, kwargs)
+        return super().save(*args, **kwargs)
 
     def event_profile(self, event):
         """Retrieve (and/or create) the event :class:`~pretalx.person.models.profile.SpeakerProfile` for this user.

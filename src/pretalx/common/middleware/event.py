@@ -57,11 +57,11 @@ class EventPermissionMiddleware:
             event = getattr(request, 'event', None)
             if event:
                 return (
-                    reverse('orga:event.login', kwargs={'event': event.slug})
+                    reverse('cas_ng_login', kwargs={'event': event.slug})
                     + f'?next={quote(request.path)}'
                     + params
                 )
-            return reverse('orga:login') + f'?next={quote(request.path)}' + params
+            return reverse('cas_ng_login') + f'?next={quote(request.path)}' + params
         return None
 
     def __call__(self, request):

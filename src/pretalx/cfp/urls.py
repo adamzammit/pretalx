@@ -12,7 +12,7 @@ urlpatterns = [
         include(
             [
                 url('^$', event.EventStartpage.as_view(), name='event.landing'),
-                url('^logout$', auth.LogoutView.as_view(), name='event.logout'),
+#                url('^logout$', auth.LogoutView.as_view(), name='event.logout'),
                 url('^auth/$', auth.EventAuth.as_view(), name='event.auth'),
                 url('^reset$', auth.ResetView.as_view(), name='event.reset'),
                 url('^login/$', auth.LoginView.as_view(), name='event.login'),

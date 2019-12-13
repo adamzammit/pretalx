@@ -11,10 +11,10 @@ from .views import (
 
 app_name = 'orga'
 urlpatterns = [
-    url('^login/$', auth.LoginView.as_view(), name='login'),
-    url('^logout/$', auth.logout_view, name='logout'),
-    url('^reset/$', auth.ResetView.as_view(), name='auth.reset'),
-    url(r'^reset/(?P<token>\w+)$', auth.RecoverView.as_view(), name='auth.recover'),
+#    url('^login/$', auth.LoginView.as_view(), name='login'),
+#    url('^logout/$', auth.logout_view, name='logout'),
+#    url('^reset/$', auth.ResetView.as_view(), name='auth.reset'),
+#    url(r'^reset/(?P<token>\w+)$', auth.RecoverView.as_view(), name='auth.recover'),
 
     url('^$', RedirectView.as_view(url='event', permanent=False)),
     url('^admin/', admin.AdminDashboard.as_view(), name='admin.dashboard'),
@@ -43,7 +43,7 @@ urlpatterns = [
     url('^event/$', dashboard.DashboardEventListView.as_view(), name='event.list'),
     url(f'^event/(?P<event>[{SLUG_CHARS}]+)/', include([
         url('^$', dashboard.EventDashboardView.as_view(), name='event.dashboard'),
-        url('^login/$', auth.LoginView.as_view(), name='event.login'),
+#        url('^login/$', auth.LoginView.as_view(), name='event.login'),
         url('^reset/$', auth.ResetView.as_view(), name='event.auth.reset'),
         url(r'^reset/(?P<token>\w+)$', auth.RecoverView.as_view(), name='event.auth.recover'),
         url('^delete$', event.EventDelete.as_view(), name='event.delete'),

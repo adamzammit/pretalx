@@ -62,6 +62,7 @@ EXTERNAL_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'rules',
+    'django_cas_ng',
 ]
 LOCAL_APPS = [
     'pretalx.api',
@@ -311,11 +312,19 @@ FORMAT_MODULE_PATH = ['pretalx.common.formats']
 
 ## AUTHENTICATION SETTINGS
 AUTH_USER_MODEL = 'person.User'
-LOGIN_URL = '/orga/login'
+LOGIN_URL = '/account/login'
+CAS_SERVER_URL = 'https://www.acspri.org.au/cas/'
+CAS_APPLY_ATTRIBUTES_TO_USER = True
+#CAS_RENAME_ATTRIBUTES = {'mail':'email','user':'name','uid':'id'}
+CAS_RENAME_ATTRIBUTES = {'mail':'email','uid':'id'}
+CAS_USERNAME_ATTRIBUTE = 'email'
+CAS_CREATE_USER_WITH_ID = True
+
 AUTHENTICATION_BACKENDS = (
     'rules.permissions.ObjectPermissionBackend',
     'django.contrib.auth.backends.ModelBackend',
     'pretalx.common.auth.AuthenticationTokenBackend',
+    'django_cas_ng.backends.CASBackend',
 )
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -341,6 +350,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',  # Uses sessions
     'django.middleware.clickjacking.XFrameOptionsMiddleware',  # Protects against clickjacking
     'csp.middleware.CSPMiddleware',  # Modifies/sets CSP headers
+    'django_cas_ng.middleware.CASMiddleware',
 ]
 
 
